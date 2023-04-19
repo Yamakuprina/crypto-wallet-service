@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Exchange</title>
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+<main>
+    <div class="side-nav">
+
+        <ul class="side-nav-top">
+            <li><h2 class="logo">Crypto wallet</h2></li>
+
+            <li>
+                <div class="link-container">
+                    <a href="index.html">
+                        <img alt="image error" id="balance-icon" src="icons/wallet.png">
+                        <b>Balance</b>
+                    </a>
+
+                </div>
+            </li>
+            <li>
+
+                <div class="link-container">
+                    <a href="transfer.html">
+                        <img alt="image error" id="transfer-icon" src="icons/transfer.png">
+                        <b>Transfer</b>
+                    </a>
+                </div>
+
+            </li>
+            <li>
+                <div class="selected">
+
+                    <div class="link-container">
+                        <a href="exchange.html">
+                            <img alt="image error" id="exchange-icon" src="icons/exchange.png">
+                            <b>Exchange</b>
+                        </a>
+                    </div>
+                </div>
+
+            </li>
+            <li>
+
+                <div class="link-container">
+                    <a href="history.html">
+                        <img alt="image error" id="history-icon" src="icons/history.png">
+                        <b>History</b>
+                    </a>
+                </div>
+
+            </li>
+            <li>
+                <div class="link-container">
+                    <a href="settings.html">
+                        <img alt="image error" id="settings-icon" src="icons/setting.png">
+                        <b>Settings</b>
+                    </a>
+                </div>
+
+            </li>
+        </ul>
+
+        <ul class="side-nav-bottom">
+            <li>
+                <a href="login.html">
+                    <img alt="image error" id="ext-icon" src="icons/exit.png">
+                    <b>Log out</b>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="circ-image">
+                    <img alt="" src="http://placekitten.com/50/50"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="display">
+
+        <div class="contents">
+            <h1>Exchange</h1>
+
+            <div class="table-container">
+                <div class="container-contents">
+                    <div class="table-top-with-text">
+                        <h3>Fill the following fields</h3>
+                    </div>
+                    <form class="operation">
+                        <div>
+                            <label>
+                                <input id="sender-wallet" placeholder="Sender wallet blockchain address" required
+                                       type="text">
+                            </label>
+                            <label>
+                                <input id="receiver-wallet" placeholder="Receiver wallet blockchain address" required
+                                       type="text">
+                            </label>
+                            <select>
+                                <option value="" disabled selected>Initial currency</option>
+                                <option>ETHEREUM</option>
+                                <option>BITCOIN</option>
+                                <option>LITECOIN</option>
+                                <option>DASH</option>
+                            </select>
+                            <select>
+                                <option value="" disabled selected>Target currency</option>
+                                <option>ETHEREUM</option>
+                                <option>BITCOIN</option>
+                                <option>LITECOIN</option>
+                                <option>DASH</option>
+                            </select>
+                            <label>
+                                <input id="transaction-amount" placeholder="Amount of initial currency" required
+                                       type="text">
+                            </label>
+                            <button class="popup-submit-button" type="submit">Отправить</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+<!--<div class="popup-background">-->
+<!--    <form class="popup">-->
+<!--        <div class="popup-title">-->
+<!--            <img class="close-popup" src="icons/close.png">-->
+<!--            <h3>Добавить машину:</h3>-->
+<!--        </div>-->
+
+<!--        <div class="popup-content">-->
+<!--            <label>-->
+<!--                <input id="car-brand" placeholder="Марка" required type="text">-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <input id="car-model" placeholder="Модель" required type="text">-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <input id="car-number" placeholder="Номер" required type="text">-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <input id="car-color" placeholder="Цвет" required type="text">-->
+<!--            </label>-->
+<!--            <button class="popup-submit-button" type="submit">Отправить</button>-->
+<!--        </div>-->
+
+<!--    </form>-->
+<!--</div>-->
+<!--<script src="popup.js"></script>-->
+<script src="reload-table.js"></script>
+</body>
+</html>
