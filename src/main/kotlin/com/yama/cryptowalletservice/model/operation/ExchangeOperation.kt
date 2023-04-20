@@ -15,7 +15,7 @@ class ExchangeOperation(
     transactionAmount: Double,
     commissionAmount: Double,
     status: OperationStatus,
-    var externalSystemId: UUID,
+    var externalSystemId: UUID?,
     var targetCurrency: CryptoCurrency,
     var targetAmount: Double
 ) : Operation(
