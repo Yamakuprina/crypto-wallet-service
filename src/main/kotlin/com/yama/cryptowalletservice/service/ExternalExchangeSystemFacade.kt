@@ -11,11 +11,11 @@ class ExternalExchangeSystemFacade(
 ) {
     val restTemplate = RestTemplate()
     fun performExchangeOperation(exchangeOperation: ExchangeOperation): ExchangeOperation {
-        return restTemplate.postForEntity(
-            "${externalExchangeSystemFacadeConfiguration.url}/exchange",
-            exchangeOperation,
-            ExchangeOperation::class.java
-        ).body!!
-//        return exchangeOperation
+//        return restTemplate.postForEntity(
+//            "${externalExchangeSystemFacadeConfiguration.url}/exchange",
+//            exchangeOperation,
+//            ExchangeOperation::class.java
+//        ).body!!
+        return exchangeOperation
     }
 }

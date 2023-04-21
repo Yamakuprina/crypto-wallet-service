@@ -112,7 +112,7 @@
                                                     <td>${elem.currency}</td>
                                                     <td>${elem.transactionAmount}</td>
                                                     <td>${elem.operationType}</td>
-                                                    <td>${new Date(elem.timestamp * 1000) }</td>
+                                                    <td>${new Date(elem.timestamp) }</td>
 
                                                 </tr>`
                                                     document.getElementById("history-table").innerHTML += template
