@@ -9,6 +9,7 @@ import com.yama.cryptowalletservice.model.user.UserSettings
 import com.yama.cryptowalletservice.model.user.dto.SignUpDto
 import com.yama.cryptowalletservice.repository.UserRepository
 import com.yama.cryptowalletservice.repository.UserSettingsRepository
+import com.yama.cryptowalletservice.repository.WalletRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -17,7 +18,7 @@ import java.util.UUID
 class UserService(
     val userRepository: UserRepository,
     val userSettingsRepository: UserSettingsRepository,
-    val walletService: WalletService,
+    val walletRepository: WalletRepository,
     val pricesConversionService: PricesConversionService
 ) {
     val defaultUserSettings = UserSettings(
@@ -53,7 +54,7 @@ class UserService(
 
     fun getUserTotalBalance(userId: UUID): Double {
         val user = getUserById(userId)
-        val wallets = walletService.getWalletsByUserId(userId)
+        val wallets = walletRepository.getWalletsByUserId(userId)
         return pricesConversionService.getTotalBalance(wallets, user!!.userSettings.currency)
     }
 
