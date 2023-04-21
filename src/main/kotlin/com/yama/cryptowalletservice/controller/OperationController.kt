@@ -34,8 +34,8 @@ class OperationController(
         return ResponseEntity(operation, HttpStatus.OK)
     }
 
-    @GetMapping
-    fun getOperationsHistory(@RequestParam userId: UUID): List<Operation> {
-        return operationService.getOperationsByUserId(userId)
+    @GetMapping("/history")
+    fun getOperationsHistory(@RequestParam userId: UUID): ResponseEntity<List<Operation>> {
+        return ResponseEntity(operationService.getOperationsByUserId(userId), HttpStatus.OK)
     }
 }

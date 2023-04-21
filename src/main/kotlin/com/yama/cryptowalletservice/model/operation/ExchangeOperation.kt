@@ -19,6 +19,6 @@ class ExchangeOperation(
     var targetCurrency: CryptoCurrency,
     var targetAmount: Double
 ) : Operation(
-    id, userId, walletId, senderWalletBlockchainAddress, receiverWalletBlockchainAddress, currency,
+    id, OperationType.EXCHANGE, userId, walletId, senderWalletBlockchainAddress, receiverWalletBlockchainAddress, currency,
     transactionAmount, commissionAmount, status
 )

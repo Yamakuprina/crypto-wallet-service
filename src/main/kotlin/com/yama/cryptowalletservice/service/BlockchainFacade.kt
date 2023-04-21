@@ -20,28 +20,28 @@ class BlockchainFacade(
 ) {
     val restTemplate = RestTemplate()
     fun createNewWalletInBlockchain(userId: UUID, currency: CryptoCurrency): String {
-        val wallet = restTemplate.postForEntity(
-            "${blockchainFacadeConfiguration.url}/wallet",
-            WalletDto(id = null, userId, currency),
-            Wallet::class.java
-        )
-        return wallet.body!!.blockchainAddress
-//        return UUID.randomUUID().toString()
+//        val wallet = restTemplate.postForEntity(
+//            "${blockchainFacadeConfiguration.url}/wallet",
+//            WalletDto(id = null, userId, currency),
+//            Wallet::class.java
+//        )
+//        return wallet.body!!.blockchainAddress
+        return UUID.randomUUID().toString()
     }
 
     @Scheduled(fixedDelay = 60000)
     fun updateWallets() {
-        val wallets = walletRepository.findAll()
-        wallets.forEach { w -> w.balance += 1 }
-        walletRepository.saveAllAndFlush(wallets)
+//        val wallets = walletRepository.findAll()
+//        wallets.forEach { w -> w.balance += 1 }
+//        walletRepository.saveAllAndFlush(wallets)
     }
 
     fun performTransferOperation(transferOperation: TransferOperation): TransferOperation {
-        return restTemplate.postForEntity(
-            "${blockchainFacadeConfiguration.url}/transfer",
-            transferOperation,
-            TransferOperation::class.java
-        ).body!!
-//        return transferOperation
+//        return restTemplate.postForEntity(
+//            "${blockchainFacadeConfiguration.url}/transfer",
+//            transferOperation,
+//            TransferOperation::class.java
+//        ).body!!
+        return transferOperation
     }
 }

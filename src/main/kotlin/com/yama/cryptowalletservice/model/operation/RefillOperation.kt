@@ -15,6 +15,7 @@ class RefillOperation(
     status: OperationStatus
 ) : Operation(
     id,
+    OperationType.REFILL,
     userId,
     walletId,
     senderWalletBlockchainAddress,

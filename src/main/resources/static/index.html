@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Balance</title>
     <link href="main.css" rel="stylesheet">
+    <script src="user.js"></script>
 </head>
 <body>
 <main>
@@ -88,7 +89,22 @@
                         <h3>Total balance</h3>
                     </div>
                     <div>
-                        <h3>50 USD</h3>
+                        <h3 id="total-balance">
+                            <script>
+                                fetch("/totalbalance?" + new URLSearchParams({
+                                        userId: sessionStorage.getItem('userID'),
+                                    })).then(function(response) {
+                                    if(response.ok) {
+                                        response.json().then(function(data) {
+                                            document.getElementById("total-balance").innerHTML += data
+
+                                        });
+                                    } else {
+                                        console.log("response failed");
+                                    }
+                                })
+                            </script>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -101,17 +117,34 @@
                         </button>
                     </div>
                     <div class="scrollable">
-                        <table class ="modifiable-table">
+                        <table class ="modifiable-table" id="wallets-table">
                             <tr>
                                 <th>Currency</th>
                                 <th>Balance</th>
                                 <th>Blockchain Address</th>
                             </tr>
-                            <tr>
-                                <td>Bitcoin</td>
-                                <td>0.00001</td>
-                                <td>0xsdoriweruower213143</td>
-                            </tr>
+                            <script>
+                                fetch("/wallet?" + new URLSearchParams({
+                                    userId: sessionStorage.getItem('userID'),
+                                })).then(function(response) {
+                                    if(response.ok) {
+                                        response.json().then(function(data) {
+                                            data.forEach(function(elem) {
+                                                let template = `
+                                                <tr>
+                                                    <td>${elem.currency}</td>
+                                                    <td>${elem.balance}</td>
+                                                    <td>${elem.blockchainAddress}</td>
+                                                </tr>`
+                                                document.getElementById("wallets-table").innerHTML += template
+                                                }
+                                            )
+                                        });
+                                    } else {
+                                        console.log("response failed");
+                                    }
+                                })
+                            </script>
                         </table>
                     </div>
                 </div>
@@ -121,7 +154,7 @@
 
 </main>
 <div class="popup-background">
-    <form class="popup">
+    <form class="popup" method="POST" action="/wallet" id="create-wallet">
 
         <div class="popup-title">
             <img class="close-popup" src="icons/close.png">
@@ -129,13 +162,14 @@
         </div>
 
         <div class="popup-content">
-            <select>
+            <select name="currency">
                 <option value="" disabled selected>Currency</option>
                 <option>ETHEREUM</option>
                 <option>BITCOIN</option>
                 <option>LITECOIN</option>
                 <option>DASH</option>
             </select>
+            <input type="hidden" value="foo" name="userId" id="userId"/>
             <button class="popup-submit-button" type="submit">Create</button>
         </div>
 

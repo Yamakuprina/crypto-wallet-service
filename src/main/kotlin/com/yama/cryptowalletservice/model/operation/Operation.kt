@@ -8,10 +8,11 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-open class Operation(
+abstract class Operation(
     @Id
     @GeneratedValue
     open val id: UUID? = null,
+    open val operationType: OperationType,
     open val userId: UUID,
     open val walletId: UUID,
     open val senderWalletBlockchainAddress: String,
