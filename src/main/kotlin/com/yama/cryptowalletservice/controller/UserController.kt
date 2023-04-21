@@ -63,7 +63,7 @@ class UserController(
     }
 
     @PutMapping("/settings")
-    fun updateSettings(@RequestParam userId: UUID, userSettings: UserSettings): UserSettings {
+    fun updateSettings(@RequestParam userId: UUID, @RequestBody userSettings: UserSettings): UserSettings {
         return userService.updateUserSettings(userId, userSettings)
     }
 }

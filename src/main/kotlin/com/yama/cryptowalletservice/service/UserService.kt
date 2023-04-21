@@ -59,9 +59,9 @@ class UserService(
     }
 
     fun updateUserSettings(userId: UUID, newUserSettings: UserSettings): UserSettings {
-        val user = getUserById(userId)
-        userSettingsRepository.deleteById(user!!.userSettings.id!!)
+        val user = getUserById(userId) ?: throw UserNotFound()
         user.userSettings = userSettingsRepository.save(newUserSettings)
-        return userRepository.save(user).userSettings
+        val savedSettings = userRepository.save(user).userSettings
+        return savedSettings
     }
 }
