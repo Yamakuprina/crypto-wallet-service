@@ -1,5 +1,7 @@
 package com.yama.cryptowalletservice.service
 
+import com.yama.cryptowalletservice.model.email.EmailStatus
+import com.yama.cryptowalletservice.model.exception.EmailException
 import com.yama.cryptowalletservice.model.exception.OperationCanceled
 import com.yama.cryptowalletservice.model.exception.OperationNotFound
 import com.yama.cryptowalletservice.model.exception.UserNotFound
@@ -75,6 +77,7 @@ class OperationService(
     }
 
     fun getOperationsByUserId(userId: UUID): List<Operation> {
+        if (userService.getUserById(userId) == null) throw UserNotFound()
         return operationRepository.getOperationsByUserId(userId)
     }
 
@@ -87,6 +90,7 @@ class OperationService(
     fun exportOperationsByUserIdEmail(userId: UUID) {
         val file = exportOperationsByUserId(userId)
         val email = userService.getUserById(userId)!!.email
-        emailService.sendEmail(email, "Hi! Here's your operations history.", file)
+        val emailStatus = emailService.sendEmail(email, "Hi! Here's your operations history.", file)
+        if (emailStatus == EmailStatus.FAIL) throw EmailException()
     }
 }

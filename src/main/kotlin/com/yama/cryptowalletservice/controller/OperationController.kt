@@ -41,12 +41,12 @@ class OperationController(
         return ResponseEntity(operationService.getOperationsByUserId(userId), HttpStatus.OK)
     }
 
-    @GetMapping("/history/file")
+    @GetMapping("/history/export/file")
     fun getOperationsHistoryFile(@RequestParam userId: UUID): ResponseEntity<ByteArray> {
         return ResponseEntity(operationService.exportOperationsByUserId(userId).readBytes(), HttpStatus.OK)
     }
 
-    @GetMapping("/history/email")
+    @GetMapping("/history/export/email")
     fun getOperationsHistoryEmail(@RequestParam userId: UUID): ResponseEntity<String> {
         operationService.exportOperationsByUserIdEmail(userId)
         return ResponseEntity("Successfully sent email", HttpStatus.OK)

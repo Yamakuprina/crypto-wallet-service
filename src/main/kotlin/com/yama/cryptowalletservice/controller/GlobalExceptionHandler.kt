@@ -1,5 +1,6 @@
 package com.yama.cryptowalletservice.controller
 
+import com.yama.cryptowalletservice.model.exception.EmailException
 import com.yama.cryptowalletservice.model.exception.OperationCanceled
 import com.yama.cryptowalletservice.model.exception.OperationNotFound
 import com.yama.cryptowalletservice.model.exception.ResponseError
@@ -34,6 +35,12 @@ class GlobalExceptionHandler {
     fun handleOperationCanceled(ex: OperationCanceled): ResponseEntity<ResponseError> {
         val errorMessage = ResponseError(ex.message ?: "Operation could not be performed", HttpStatus.BAD_REQUEST)
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler
+    fun handleEmailException(ex: EmailException): ResponseEntity<ResponseError> {
+        val errorMessage = ResponseError(ex.message ?: "Email could not be sent", HttpStatus.BAD_REQUEST)
+        return ResponseEntity(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
 }
