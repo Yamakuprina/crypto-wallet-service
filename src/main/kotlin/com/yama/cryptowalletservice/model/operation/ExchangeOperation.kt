@@ -19,6 +19,18 @@ class ExchangeOperation(
     var targetCurrency: CryptoCurrency,
     var targetAmount: Double
 ) : Operation(
-    id, OperationType.EXCHANGE, userId, walletId, senderWalletBlockchainAddress, receiverWalletBlockchainAddress, currency,
-    transactionAmount, commissionAmount, status
-)
+    id,
+    OperationType.EXCHANGE,
+    userId,
+    walletId,
+    senderWalletBlockchainAddress,
+    receiverWalletBlockchainAddress,
+    currency,
+    transactionAmount,
+    commissionAmount,
+    status
+) {
+    override fun toString(): String {
+        return "RefillOperation(id=$id, externalSystemId=$externalSystemId, targetCurrency=$targetCurrency, targetAmount=$targetAmount, operationType=$operationType, userId=$userId, walletId=$walletId, senderWalletBlockchainAddress='$senderWalletBlockchainAddress', receiverWalletBlockchainAddress='$receiverWalletBlockchainAddress', currency=$currency, transactionAmount=$transactionAmount, commissionAmount=$commissionAmount, status=$status, blockchainOperationHash=$blockchainOperationHash, timestamp=$timestamp)"
+    }
+}

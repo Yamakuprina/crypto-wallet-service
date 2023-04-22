@@ -13,6 +13,7 @@ import com.yama.cryptowalletservice.model.operation.dto.TransferDto
 import com.yama.cryptowalletservice.repository.OperationRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.io.File
 import java.util.UUID
 
 @Service
@@ -21,7 +22,8 @@ class OperationService(
     val operationRepository: OperationRepository,
     val walletService: WalletService,
     val blockchainFacade: BlockchainFacade,
-    val externalSystemFacade: ExternalExchangeSystemFacade
+    val externalSystemFacade: ExternalExchangeSystemFacade,
+    val emailService: EmailService
 ) {
     fun createTransferOperation(transferDto: TransferDto): TransferOperation {
         if (userService.getUserById(transferDto.userId) == null) throw UserNotFound()
@@ -74,5 +76,17 @@ class OperationService(
 
     fun getOperationsByUserId(userId: UUID): List<Operation> {
         return operationRepository.getOperationsByUserId(userId)
+    }
+
+    fun exportOperationsByUserId(userId: UUID): File {
+        val operations = getOperationsByUserId(userId)
+        val operationsString = operations.map { operation -> operation.toString() }.joinToString(separator = "\n")
+        return File("operations-history-$userId.txt").also { it.writeText(operationsString) }
+    }
+
+    fun exportOperationsByUserIdEmail(userId: UUID) {
+        val file = exportOperationsByUserId(userId)
+        val email = userService.getUserById(userId)!!.email
+        emailService.sendEmail(email, "Hi! Here's your operations history.", file)
     }
 }

@@ -26,4 +26,8 @@ class TransferOperation(
     transactionAmount,
     commissionAmount,
     status
-)
+) {
+    override fun toString(): String {
+        return "TransferOperation(id=$id, operationType=$operationType, userId=$userId, walletId=$walletId, senderWalletBlockchainAddress='$senderWalletBlockchainAddress', receiverWalletBlockchainAddress='$receiverWalletBlockchainAddress', currency=$currency, transactionAmount=$transactionAmount, commissionAmount=$commissionAmount, status=$status, blockchainOperationHash=$blockchainOperationHash, timestamp=$timestamp)"
+    }
+}
