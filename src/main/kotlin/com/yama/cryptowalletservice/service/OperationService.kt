@@ -27,7 +27,7 @@ class OperationService(
         if (userService.getUserById(transferDto.userId) == null) throw UserNotFound()
         val wallet = walletService.getWalletByBlockchainAddress(transferDto.senderWalletBlockchainAddress)
             ?: throw WalletNotFound()
-        if (wallet.userId != transferDto.userId) throw OperationCanceled()
+        if (wallet.userId != transferDto.userId || wallet.balance < transferDto.transactionAmount) throw OperationCanceled()
         val transferOperation = TransferOperation(
             id = null,
             userId = transferDto.userId,
@@ -39,15 +39,16 @@ class OperationService(
             commissionAmount = 0.0,
             status = OperationStatus.IN_PROGRESS
         )
-        val performedOperation = blockchainFacade.performTransferOperation(transferOperation)
-        return operationRepository.save(performedOperation)
+        return operationRepository.save(transferOperation).also {
+            blockchainFacade.performTransferOperation(transferOperation)
+        }
     }
 
     fun createExchangeOperation(exchangeDto: ExchangeDto): ExchangeOperation {
         if (userService.getUserById(exchangeDto.userId) == null) throw UserNotFound()
         val wallet = walletService.getWalletByBlockchainAddress(exchangeDto.senderWalletBlockchainAddress)
             ?: throw WalletNotFound()
-        if (wallet.userId != exchangeDto.userId) throw OperationCanceled()
+        if (wallet.userId != exchangeDto.userId || wallet.balance < exchangeDto.transactionAmount) throw OperationCanceled()
         val exchangeOperation = ExchangeOperation(
             id = null,
             userId = exchangeDto.userId,
@@ -62,8 +63,9 @@ class OperationService(
             targetCurrency = exchangeDto.targetCurrency,
             targetAmount = exchangeDto.transactionAmount
         )
-        val performedOperation = externalSystemFacade.performExchangeOperation(exchangeOperation)
-        return operationRepository.save(performedOperation)
+        return operationRepository.save(exchangeOperation).also {
+            externalSystemFacade.performExchangeOperation(exchangeOperation)
+        }
     }
 
     fun getOperationById(operationId: UUID): Operation {
