@@ -18,7 +18,7 @@ class BalanceController(
     }
 
     @GetMapping("/totalbalance")
-    fun getTotalBalance(@RequestParam userId: UUID): ResponseEntity<Double> {
+    fun getTotalBalance(@RequestParam userId: UUID): ResponseEntity<String> {
         return ResponseEntity(userService.getUserTotalBalance(userId), HttpStatus.OK)
     }
 }

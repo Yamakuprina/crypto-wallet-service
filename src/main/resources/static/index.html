@@ -95,7 +95,7 @@
                                         userId: sessionStorage.getItem('userID'),
                                     })).then(function(response) {
                                     if(response.ok) {
-                                        response.json().then(function(data) {
+                                        response.text().then(function(data) {
                                             document.getElementById("total-balance").innerHTML += data
 
                                         });

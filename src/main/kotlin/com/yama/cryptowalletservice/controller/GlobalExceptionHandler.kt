@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class GlobalExceptionHandler {
     @ExceptionHandler
     fun handleOperationNotFound(ex: OperationNotFound): ResponseEntity<ResponseError> {
-        val errorMessage = ResponseError(ex.message ?: "", HttpStatus.NOT_FOUND)
+        val errorMessage = ResponseError(ex.message ?: "Operation not found", HttpStatus.NOT_FOUND)
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
     @ExceptionHandler
     fun handleUserNotFound(ex: UserNotFound): ResponseEntity<ResponseError> {
-        val errorMessage = ResponseError(ex.message ?: "", HttpStatus.NOT_FOUND)
+        val errorMessage = ResponseError(ex.message ?: "User not found", HttpStatus.NOT_FOUND)
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
     @ExceptionHandler
     fun handleWalletNotFound(ex: WalletNotFound): ResponseEntity<ResponseError> {
-        val errorMessage = ResponseError(ex.message ?: "", HttpStatus.NOT_FOUND)
+        val errorMessage = ResponseError(ex.message ?: "Wallet not found", HttpStatus.NOT_FOUND)
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
     @ExceptionHandler
     fun handleOperationCanceled(ex: OperationCanceled): ResponseEntity<ResponseError> {
-        val errorMessage = ResponseError(ex.message ?: "", HttpStatus.BAD_REQUEST)
+        val errorMessage = ResponseError(ex.message ?: "Operation could not be performed", HttpStatus.BAD_REQUEST)
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
     }
 

@@ -97,6 +97,7 @@
                                 <th>Amount</th>
                                 <th>Type</th>
                                 <th>Date</th>
+                                <th>Status</th>
                             </tr>
                             <script>
                                 fetch("/operation/history?" + new URLSearchParams({
@@ -113,7 +114,7 @@
                                                     <td>${elem.transactionAmount}</td>
                                                     <td>${elem.operationType}</td>
                                                     <td>${new Date(elem.timestamp) }</td>
-
+                                                    <td>${elem.status}</td>
                                                 </tr>`
                                                     document.getElementById("history-table").innerHTML += template
                                                 }

@@ -52,10 +52,10 @@ class UserService(
         userRepository.deleteById(id)
     }
 
-    fun getUserTotalBalance(userId: UUID): Double {
+    fun getUserTotalBalance(userId: UUID): String {
         val user = getUserById(userId)
         val wallets = walletRepository.getWalletsByUserId(userId)
-        return pricesConversionService.getTotalBalance(wallets, user!!.userSettings.currency)
+        return "${pricesConversionService.getTotalBalance(wallets, user!!.userSettings.currency)} ${user.userSettings.currency}"
     }
 
     fun updateUserSettings(userId: UUID, newUserSettings: UserSettings): UserSettings {
